@@ -4,45 +4,48 @@ import { Link } from "react-router-dom"
 import ExpandMore from "@material-ui/icons/ExpandMoreRounded"
 import '../style.css'
 
+
 const Home = () => {
 
   const [books, setBooks] = useState([])
+  const [toggle, setToggle] = useState(true)
+  const [oldData, setoldData] = useState()
 
   const sortString = (data) => {
-    const sortedBooks = [...books];
+
+    const sortedBooks = [...books]
 
     sortedBooks.sort((a, b) => {
-      const stringA = a[data].toUpperCase();
-      const stringB = b[data].toUpperCase();
+      const stringA = a[data].toUpperCase()
+      const stringB = b[data].toUpperCase()
 
-      return stringA.localeCompare(stringB);
-    });
+      return toggle ? stringA.localeCompare(stringB) : stringB.localeCompare(stringA)
+    })
 
-    setBooks(sortedBooks);
-  };
+    setBooks(sortedBooks)
+    
+    oldData == data || oldData == undefined ? setToggle(!toggle) : setToggle(true)
+
+    setoldData(data)
+
+    console.log(toggle)
+    console.log(oldData)
+  }
 
   const sortNumbers = (data) => {
-    const sortedBooks = [...books];
+    const sortedBooks = [...books]
 
     sortedBooks.sort((a, b) => {
-      const numberA = a[data]
-      const numberB = b[data]
+      return toggle ? a[data] - b[data] : b[data] - a[data]
+    })
 
-      if (numberA < numberB) {
+    setBooks(sortedBooks)
 
-        return -1;
+    oldData == data || oldData == undefined ? setToggle(!toggle) : setToggle(true)
 
-      } else if (numberA > numberB) {
+    setoldData(data)
 
-        return 1;
-
-      }
-     
-      return 0;
-    });
-
-    setBooks(sortedBooks);
-  };
+  }
 
   useEffect(() => {
 
@@ -71,7 +74,7 @@ const Home = () => {
               <th className="table-head-item">
                 <div className="th-container"> 
                   <div>Title</div>
-                  <button className="default-button" onClick={() => sortString('title')}>
+                  <button className="default-button" onClick={() => {sortString('title')}}>
                     <ExpandMore />
                   </button>
                 </div>
