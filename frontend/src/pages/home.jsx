@@ -2,7 +2,11 @@ import React, {useEffect, useState} from "react"
 import axios from 'axios'
 import { Link } from "react-router-dom"
 import ExpandMore from "@material-ui/icons/ExpandMoreRounded"
+import Dashboard from "@material-ui/icons/DashboardRounded"
+//import TableRows from "@material-ui/icons/TableRowsRounded"
+import Layers from "@material-ui/icons/LayersRounded"
 import '../style.css'
+import DeleteCard from "../components/deleteBook"
 
 
 const Home = () => {
@@ -10,6 +14,9 @@ const Home = () => {
   const [books, setBooks] = useState([])
   const [toggle, setToggle] = useState(true)
   const [oldData, setoldData] = useState()
+
+  const [deleteToggle, setDeleteToggle] = useState(false)
+  const [deleteId, setDeleteId] = useState()
 
   const sortString = (data) => {
 
@@ -19,32 +26,72 @@ const Home = () => {
       const stringA = a[data].toUpperCase()
       const stringB = b[data].toUpperCase()
 
-      return toggle ? stringA.localeCompare(stringB) : stringB.localeCompare(stringA)
+      if (toggle || oldData !== data) {
+        return (
+            setToggle(false),
+            stringA.localeCompare(stringB)
+          )
+      } else {
+        return (
+            setToggle(true),
+            stringB.localeCompare(stringA)
+          )
+      }
     })
 
     setBooks(sortedBooks)
-    
-    oldData == data || oldData == undefined ? setToggle(!toggle) : setToggle(true)
-
     setoldData(data)
-
-    console.log(toggle)
-    console.log(oldData)
   }
 
   const sortNumbers = (data) => {
     const sortedBooks = [...books]
 
     sortedBooks.sort((a, b) => {
-      return toggle ? a[data] - b[data] : b[data] - a[data]
+
+      if (toggle || oldData !== data) {
+        return (
+            setToggle(false),
+            a[data] - b[data]
+          )
+      } else {
+        return (
+            setToggle(true),
+            b[data] - a[data]
+          )
+      }
     })
 
     setBooks(sortedBooks)
-
-    oldData == data || oldData == undefined ? setToggle(!toggle) : setToggle(true)
-
     setoldData(data)
 
+  }
+
+  const handleDelete = (id) => {
+    axios
+      .delete(`http://localhost:27017/books/${id}`)
+      .then(() => {
+        window.location.reload()
+      })
+      .catch((error) => {
+        console.log(error)
+        alert('error!')
+      })
+      
+  }
+
+  const toggleDelete = () => {
+    const deleteCard = document.querySelector('.delete-card')
+    const overlay = document.querySelector('.overlay')
+    if (deleteToggle) {
+      deleteCard.style.display = 'none'
+      overlay.style.display = 'none'
+      setDeleteToggle(false)
+    } else {
+      deleteCard.style.display = 'flex'
+      overlay.style.display = 'block'
+      setDeleteToggle(true)
+    }
+  
   }
 
   useEffect(() => {
@@ -66,6 +113,11 @@ const Home = () => {
         <Link to='/books/create'>
           <button>Create Book</button>
         </Link>
+        <div className="switch">
+          <input type="checkbox" className="switch-checkbox" />
+          <Dashboard className="switch-item-active" />
+          <Layers className="switch-item" />
+        </div>
       </div>
       <table className="table">
           <thead className="table-head">
@@ -74,7 +126,7 @@ const Home = () => {
               <th className="table-head-item">
                 <div className="th-container"> 
                   <div>Title</div>
-                  <button className="default-button" onClick={() => {sortString('title')}}>
+                  <button className="default-button" onClick={() => sortString('title')}>
                     <ExpandMore />
                   </button>
                 </div>
@@ -121,15 +173,15 @@ const Home = () => {
                     <Link to={`/books/edit/${book._id}`}>
                       <button>Edit</button>
                     </Link>
-                    <Link to={`/books/delete/${book._id}`}>
-                      <button>Delete</button>
-                    </Link>
+                    <button className="delete-button-secondary" onClick={() => (toggleDelete(), setDeleteId(book._id))}>Delete</button>
                   </div>
                 </td>
               </tr>
             ))}
           </tbody>
       </table>
+      <DeleteCard onDelete={() => handleDelete(deleteId)} onCancel={toggleDelete} />
+      <div className="overlay"></div>
     </div>
   )
 }
