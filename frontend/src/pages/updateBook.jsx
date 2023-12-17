@@ -48,7 +48,7 @@ const UpdateBook = () => {
   return (
     <div className="page">
       <BackButton />
-      <h1>Update Book</h1>
+      <h1>Edit Book</h1>
 
       <div className="form">
         <div className="form-cell">

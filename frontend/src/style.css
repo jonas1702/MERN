@@ -6,6 +6,7 @@
 
 table {
     border-spacing: 10px;
+    width: 100%;
 }
 
 .page {
@@ -43,6 +44,12 @@ table {
     justify-content: space-between;
 }
 
+.top-row-container {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
 .table-head-item {
     text-align: left;
     vertical-align: baseline;
@@ -52,8 +59,20 @@ table {
     display: flex;
     flex-direction: row;
     justify-content: left;
-    align-items: center;
-    gap: 10px;
+    align-items: flex-start;
+    gap: .25rem;
+}
+
+.op {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: .25rem;
+}
+
+.table-body {
+    border-spacing: .25rem;
 }
 
 .table-cell {
@@ -89,7 +108,7 @@ table {
 .form-cell-input {
     padding: .5rem;
     border-radius: .6rem;
-    border: 2px solid #213547;
+    border: 1px solid #213547;
     outline: none;
     font-size: .9rem;
 }
@@ -110,6 +129,14 @@ table {
     border-radius: .6rem;
     background-color: #fff;
     display: none;
+}
+
+.delete-card-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .25rem;
 }
 
 .delete-button {
@@ -155,9 +182,41 @@ table {
 }
 
 .switch-item-active {
-    color: #213547;
+    color: #213547 !important;
 }
 
 .switch-item {
     color: #c1c1c1;
+}
+
+/* card */
+
+.card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: .6rem;
+    height: 200px;
+    background: hsl(0, 0%, 98%);
+    transition: 0.25s all ease;
+}
+
+.card-bottom-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .25rem;
 }
