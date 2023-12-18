@@ -7,6 +7,7 @@ import DeleteCard from "../components/DeleteBook"
 import BookTable from "../components/BookTable"
 import BookCards from "../components/BookCards"
 import Footer from "../components/Footer"
+import SearchBar from "../components/Search"
 
 
 const Home = () => {
@@ -33,6 +34,7 @@ const Home = () => {
         <div className="top-row">
           <h1>Book Database</h1>
           <div className="top-row-container">
+            <SearchBar books={books} setBooks={setBooks} />
             <Link to='/books/create'>
               <button>Create Book</button>
             </Link>

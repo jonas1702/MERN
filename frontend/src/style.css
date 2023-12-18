@@ -263,3 +263,24 @@ table {
     border-radius: 0 0 50% 50%;
 
 }
+
+/* Search Bar */
+
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .5rem;
+    padding: .5rem;
+    border-radius: .6rem;
+    border: 1px solid #213547;
+    outline: none;
+    font-size: .9rem;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    font-size: .9rem;
+}
