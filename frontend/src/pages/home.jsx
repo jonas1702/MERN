@@ -17,7 +17,6 @@ const Home = () => {
   const [isChecked, setIsChecked] = useState(false)
 
   useEffect(() => {
-
     axios
       .get('http://localhost:27017/books')
       .then((response) => {
