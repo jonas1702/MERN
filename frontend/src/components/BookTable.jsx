@@ -141,10 +141,10 @@ function BookTable({ books, setBooks }) {
                 </thead>
                 <tbody className="table-body">
 
-                    {books.map((book, index) => (
+                    {books.map((book) => (
                         <tr key={book._id}>
                             <td className="table-cell">
-                            {index + 1}
+                            {book.index}
                             </td>
                             <td className="table-cell">
                             {book.title}

@@ -4,6 +4,9 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import '../style.css'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const UpdateBook = () => {
 
   const [title, setTitle] = useState('')
@@ -12,6 +15,19 @@ const UpdateBook = () => {
   const navigate = useNavigate()
 
   const { id } = useParams()
+
+  const notify = () => toast.error('Please send all the required fields! :)', {
+
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+
+  });
 
   useEffect(() => {
     axios
@@ -41,7 +57,7 @@ const UpdateBook = () => {
       })
       .catch((error) => {
         console.log(error)
-        alert('error')
+        notify()
       })
   }
 
@@ -66,6 +82,9 @@ const UpdateBook = () => {
 
         <button onClick={handleEdit}>Save!!</button>
       </div>
+
+      <ToastContainer />
+
     </div>
   )
 }

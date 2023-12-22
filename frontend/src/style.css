@@ -142,15 +142,15 @@ table {
 }
 
 .delete-button {
-    border-color: #cc272d !important;
+    border-color: hsl(337, 84%, 49%) !important;
 }
 
 .delete-button:hover {
-    background-color: hsla(358, 68%, 48%, 0.15);
+    background-color: hsla(337, 84%, 49%, 0.15)
 }
 
 .delete-button-secondary:hover {
-    border-color: #cc272d !important;
+    border-color: #e61465 !important;
 }
 
 /* switch */
@@ -234,7 +234,7 @@ table {
     gap: 1rem;
     align-items: center;
     flex-direction: column;
-    background-color: hsl(337, 83%, 49%);
+    background-color: #e61465;
     position: relative;
     color: hsl(0, 0%, 98%);
 }

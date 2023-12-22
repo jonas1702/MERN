@@ -17,6 +17,7 @@ router.post('/', async (request, response) => {
         }
         
         const newBook = {
+            index: request.body.index,
             title: request.body.title,
             author: request.body.author,
             publishYear: request.body.publishYear

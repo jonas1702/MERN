@@ -50,7 +50,7 @@ function BookCards( { books, setBooks } ) {
                 {books.map((book, index) => (
                     <div className='card' key={book._id}>
                         <div className='card-top'>
-                            <h3>{index + 1}</h3>
+                            <h3>{book.index}</h3>
                             <h3>{book.title}</h3>
                             <p>{book.author}</p>
                         </div>

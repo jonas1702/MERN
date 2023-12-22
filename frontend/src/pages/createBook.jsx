@@ -1,8 +1,11 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import BackButton from "../components/BackButton";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import '../style.css'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const CreateBook = () => {
@@ -12,8 +15,25 @@ const CreateBook = () => {
   const [publishYear, setPublishYear] = useState('')
   const navigate = useNavigate()
 
+  const [index, setIndex] = useState()
+
+  const notify = () => toast.error('Please send all the required fields! :)', {
+
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+
+  });
+
   const handleSave = () => {
+    
     const data = {
+      index,
       title,
       author,
       publishYear
@@ -26,9 +46,20 @@ const CreateBook = () => {
       })
       .catch((error) => {
         console.log(error)
-        alert('error')
+        notify()
       })
   }
+
+  useEffect(() => { 
+    axios
+      .get('http://localhost:27017/books')
+      .then((response) => {
+          setIndex(response.data.data.length + 1)
+      })
+      .catch((error) => {
+        console.log(error)
+    })
+  }, [])
 
   return (
     <div className="page">
@@ -51,7 +82,11 @@ const CreateBook = () => {
 
         <button onClick={handleSave}>Save!!</button>
       </div>
+
+      <ToastContainer />
+
     </div>
+    
   )
 }
 
