@@ -4,7 +4,7 @@ import '../style.css'
 import DeleteCard from "../components/DeleteBook"
 import axios from 'axios'
 
-function BookCards( { books, setBooks } ) {
+function BookCards( { books } ) {
 
     const [deleteToggle, setDeleteToggle] = useState(false)
     const [deleteId, setDeleteId] = useState() 
@@ -47,7 +47,7 @@ function BookCards( { books, setBooks } ) {
     return (
         <div>
             <div className='card-container'>
-                {books.map((book, index) => (
+                {books.map((book) => (
                     <div className='card' key={book._id}>
                         <div className='card-top'>
                             <h3>{book.index}</h3>

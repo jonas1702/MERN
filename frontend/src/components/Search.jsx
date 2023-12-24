@@ -6,9 +6,8 @@ import axios from 'axios';
 function SearchBar( {setBooks} ) {
 
     const [oldBooks, setOldBooks] = useState([])
-
     //reset books to all books when component mounts
-    useEffect(() => {
+    const getallBooks = () => {
         axios
           .get('http://localhost:27017/books')
           .then((response) => {
@@ -17,10 +16,18 @@ function SearchBar( {setBooks} ) {
           .catch((error) => {
             console.log(error)
           })
-      }, [])
+    }
+
+    //prevent getallBooks from running on every render
+    useEffect(() => {
+        getallBooks()
+    }, [])
 
     // filter books based on input
     const handleInput = () => {  
+
+        getallBooks()
+        
         const searchInp = document.querySelector('.search-input')
         const input = searchInp.value.toLowerCase()
         
@@ -38,10 +45,12 @@ function SearchBar( {setBooks} ) {
         })
 
         const filteredBooks = [...filteredTitle, ...filteredAuthor, ...filteredPublishYear] // combine all filtered arrays
+        
+        const uniqueBooks = [...new Set(filteredBooks)] // remove duplicates
 
         if (input == '') return setBooks(oldBooks) // if input is empty, reset books to all books
 
-        setBooks(filteredBooks) // set books to filtered books
+        setBooks(uniqueBooks) // set books to filtered books
     }
 
     // support for enter key press
