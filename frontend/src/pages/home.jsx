@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Link } from "react-router-dom"
 import '../style.css'
 import SwitchBtn from "../components/SwitchBtn"
-import DeleteCard from "../components/DeleteBook"
+import Nav from "../components/Nav"
 import BookTable from "../components/BookTable"
 import BookCards from "../components/BookCards"
 import Footer from "../components/Footer"
@@ -30,14 +30,14 @@ const Home = () => {
   return (
     <main>
       <div className="container">
-        <div className="top-row">
-          <h1>Book Database</h1>
-          <div className="top-row-container">
-            <SearchBar books={books} setBooks={setBooks} />
-            <Link to='/books/create'>
-              <button>Create Book</button>
-            </Link>
-            <SwitchBtn isChecked={isChecked} setIsChecked={setIsChecked} />
+        <div className="nav">
+          <Nav />
+          <div className="top-row">
+            <h1>Book Database</h1>
+            <div className="top-row-container">
+              <SearchBar books={books} setBooks={setBooks} />
+              <SwitchBtn isChecked={isChecked} setIsChecked={setIsChecked} />
+            </div>
           </div>
         </div>
           { !isChecked ?  <BookTable books={books} setBooks={setBooks} /> : <BookCards books={books} setBooks={setBooks} /> }

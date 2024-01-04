@@ -32,7 +32,7 @@ table {
     width: 80%;
     position: relative;
     margin: 0 auto;
-    padding: 7rem 0px 1.5rem 0px;
+    padding: 1.5rem 0px;
     gap: 60px;
     z-index: 100;
     display: flex;
@@ -42,7 +42,7 @@ table {
 .top-row {
     display: flex;
     width: 100%;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
 }
 
@@ -216,6 +216,13 @@ table {
     transition: 0.25s all ease;
 }
 
+.card-top-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .5rem;
+}
+
 .card-bottom-buttons {
     display: flex;
     flex-direction: row;
@@ -283,4 +290,28 @@ table {
     border: none;
     outline: none;
     font-size: .9rem;
+}
+
+/* Nav */
+
+.nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    width: 120px;
+}
+
+.nav-container--user {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: .5rem;
 }

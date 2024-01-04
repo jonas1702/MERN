@@ -1,7 +1,9 @@
 import express, { request, response } from "express";
 import { PORT, mongoDBurl } from "./config.js";
 import { Book } from "./models/bookModel.js";
+import { User } from "./models/userModel.js";
 import booksRoute from './routes/booksRoute.js'
+import usersRoute from './routes/userRoutes.js'
 import cors from 'cors'
 
 import mongoose from "mongoose";
@@ -18,6 +20,7 @@ app.use(express.json())
 
 app.use(cors())
 
+
 /* setting up a route for the server */
 app.get('/', (request, response) => {
     console.log(request)
@@ -25,6 +28,8 @@ app.get('/', (request, response) => {
 })
 
 app.use('/books', booksRoute)
+
+app.use('/users', usersRoute)
 
 mongoose
     .connect(mongoDBurl)
